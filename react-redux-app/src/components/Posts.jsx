@@ -1,13 +1,21 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"; // connects react components with redux store
+import { fetchPosts } from "../actions/postActions";
 
 class Posts extends Component {
+  // below will move to store
   state = { posts: [] };
 
+  // below will go away with redux as it's moved to postActions
+  // componentWillMount() {
+  //   fetch("https://jsonplaceholder.typicode.com/posts")
+  //     .then(res => res.json())
+  //     .then(data => this.setState({ posts: data }));
+  // }
   componentWillMount() {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(data => this.setState({ posts: data }));
+    this.props.fetchPosts();
   }
+
   render() {
     return (
       <div>
@@ -23,4 +31,11 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
+//export default Posts;
+// This will change to connect which connects state to properties
+export default connect(
+  null,
+  { fetchPosts }
+)(Posts);
+
+// Post the above, fetchPosts will be available in this.props
