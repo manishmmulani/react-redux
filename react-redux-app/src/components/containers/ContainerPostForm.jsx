@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import PostForm from "../presentational/PostForm";
-import { addPost } from "../../redux/Actions";
+import { createPost } from "../../redux/Actions";
 
 const mapStateToProps = state => {
   return {};
@@ -8,11 +8,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: (title, body) => dispatch(addPost(title, body))
+    onSubmit: (title, body) => dispatch(createPost(title, body))
   };
 };
 
 export default connect(
   mapStateToProps,
+  //{ onSubmit: createPost }
   mapDispatchToProps
 )(PostForm);
